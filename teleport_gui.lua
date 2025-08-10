@@ -1,62 +1,63 @@
--- Teleport to Base GUI Script
--- By RoboLOx
+-- Brainrot TP GUI (Base Teleport Script)
+-- By AhmedSap Optimized
 
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
+local player = game.Players.LocalPlayer
 local basePosition = nil
 
 -- Create GUI
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "BaseTeleportGUI"
-ScreenGui.Parent = player:WaitForChild("PlayerGui")
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = player:WaitForChild("PlayerGui")
 
-local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0, 250, 0, 150)
-Frame.Position = UDim2.new(0.5, -125, 0.5, -75)
-Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Frame.BorderSizePixel = 2
-Frame.Parent = ScreenGui
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 250, 0, 150)
+frame.Position = UDim2.new(0.05, 0, 0.3, 0)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.BorderSizePixel = 2
+frame.Parent = screenGui
 
-local UICorner = Instance.new("UICorner", Frame)
-
--- Title
-local Title = Instance.new("TextLabel")
-Title.Text = "🏠 Base Teleport"
-Title.Size = UDim2.new(1, 0, 0, 30)
-Title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.Parent = Frame
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 40)
+title.BackgroundTransparency = 1
+title.Text = "Brainrot Base TP"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 20
+title.Parent = frame
 
 -- Set Base Button
-local SetBaseBtn = Instance.new("TextButton")
-SetBaseBtn.Text = "📍 Set Base Position"
-SetBaseBtn.Size = UDim2.new(1, -20, 0, 40)
-SetBaseBtn.Position = UDim2.new(0, 10, 0, 40)
-SetBaseBtn.BackgroundColor3 = Color3.fromRGB(70, 130, 180)
-SetBaseBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-SetBaseBtn.Parent = Frame
+local setBaseBtn = Instance.new("TextButton")
+setBaseBtn.Size = UDim2.new(1, 0, 0, 40)
+setBaseBtn.Position = UDim2.new(0, 0, 0.3, 0)
+setBaseBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+setBaseBtn.Text = "Set Base Location"
+setBaseBtn.TextColor3 = Color3.new(1, 1, 1)
+setBaseBtn.Font = Enum.Font.SourceSansBold
+setBaseBtn.TextSize = 18
+setBaseBtn.Parent = frame
 
--- Teleport Button
-local TeleportBtn = Instance.new("TextButton")
-TeleportBtn.Text = "🚀 Teleport to Base"
-TeleportBtn.Size = UDim2.new(1, -20, 0, 40)
-TeleportBtn.Position = UDim2.new(0, 10, 0, 90)
-TeleportBtn.BackgroundColor3 = Color3.fromRGB(34, 139, 34)
-TeleportBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-TeleportBtn.Parent = Frame
-
--- Functions
-SetBaseBtn.MouseButton1Click:Connect(function()
-	if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-		basePosition = player.Character.HumanoidRootPart.CFrame
-		print("[BaseTeleport] Base position set!")
-	end
+setBaseBtn.MouseButton1Click:Connect(function()
+    if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        basePosition = player.Character.HumanoidRootPart.CFrame
+        print("[Base TP] Base location set!")
+    end
 end)
 
-TeleportBtn.MouseButton1Click:Connect(function()
-	if basePosition and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-		player.Character.HumanoidRootPart.CFrame = basePosition
-	else
-		warn("[BaseTeleport] Base position not set!")
-	end
+-- Teleport Button
+local tpBtn = Instance.new("TextButton")
+tpBtn.Size = UDim2.new(1, 0, 0, 40)
+tpBtn.Position = UDim2.new(0, 0, 0.65, 0)
+tpBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
+tpBtn.Text = "Teleport to Base"
+tpBtn.TextColor3 = Color3.new(1, 1, 1)
+tpBtn.Font = Enum.Font.SourceSansBold
+tpBtn.TextSize = 18
+tpBtn.Parent = frame
+
+tpBtn.MouseButton1Click:Connect(function()
+    if basePosition and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+        player.Character.HumanoidRootPart.CFrame = basePosition
+        print("[Base TP] Teleported to base!")
+    else
+        warn("[Base TP] No base location set!")
+    end
 end)
